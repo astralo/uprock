@@ -6,8 +6,7 @@
         elem             = document.getElementById('block'),
         wrapper          = document.getElementById('wrapper'),
 
-        sFadeStartColor  = '#72cc35', //стартовый цвет
-        sFadeFinishColor = "#FF4500"; // конечный цвет
+        sFadeStartColor  = '#72cc35'; //стартовый цвет
 
     chet = 0;
 
@@ -15,7 +14,6 @@
 
     // парсим цвета
     aRGBStart  = sFadeStartColor.replace("#", "").match(/.{2}/g);
-    aRGBFinish = sFadeFinishColor.replace("#", "").match(/.{2}/g);
 
     // диагональ ромба для вращения
     elemHeight = elem.clientHeight * Math.sqrt(2);
@@ -61,14 +59,12 @@
     }
 
     // промежуточный цвет
-    function getFadeMiddleColor(rate) {
-        var startPercent = 1 - rate;
-
+    function getFadeMiddleColor() {
         var R, G, B;
 
-        R = Math.floor(('0x' + aRGBStart[0]) * startPercent + ('0x' + aRGBFinish[0]) * rate);
-        G = Math.floor(('0x' + aRGBStart[1]) * startPercent + ('0x' + aRGBFinish[1]) * rate);
-        B = Math.floor(('0x' + aRGBStart[2]) * startPercent + ('0x' + aRGBFinish[2]) * rate);
+        R = Math.floor(Math.random() * (256));
+        G = Math.floor(Math.random() * (256));
+        B = Math.floor(Math.random() * (256));
 
         return 'rgb(' + R + ',' + G + ',' + B + ')';
     }
@@ -82,7 +78,7 @@
     // установка стилей и угла вращения
     function setView(rate) {
         elem.style.transform       = 'rotate(' + Math.floor(45 * (1 + rate)) + 'deg)';
-        elem.style.backgroundColor = getFadeMiddleColor(rate);
+        elem.style.backgroundColor = getFadeMiddleColor();
         elem.style.borderRadius    = Math.floor(rate * 100 / 2) + '%';
     }
 
